@@ -1,0 +1,17 @@
+﻿@page
+@model BookLand.Web.Areas.Admin.Pages.Books.EditModel
+@{
+}
+
+<h1>Edit</h1>
+<hr />
+<form method="post" class="form">
+    <div class="row">
+        <div class="col-6">
+            <input asp-for="Book.Id" hidden />
+            <input class="form-control" type="text" asp-for="Book.Title" />
+            <button class="btn btn-primary mt-3">Submit</button>
+        </div>
+    </div>
+
+</form>
