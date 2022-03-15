@@ -19,8 +19,11 @@
         {
             <tr>
                 <td>@book.Title</td>
-                <td><a asp-page="./edit" asp-route-id="@book.Id" class="btn btn-primary">Edit</a></td>
-                <td><a asp-page="./details" asp-route-id="@book.Id" class="btn btn-primary">Details</a></td>
+                <td>
+                    <a asp-page="./edit" asp-route-id="@book.Id" class="btn btn-primary">Edit</a>
+                    <a asp-page="./details" asp-route-id="@book.Id" class="btn btn-info">Details</a>
+                    <a asp-page="./delete" asp-route-id="@book.Id" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

@@ -1,0 +1,17 @@
+﻿@page
+@model BookLand.Web.Areas.Admin.Pages.Books.DeleteModel
+@{
+}
+
+<h1>Delete</h1>
+<hr />
+<form method="post" class="form">
+    <div class="row">
+        <div class="col-6">
+            <input asp-for="Book.Id" hidden />
+            <input class="form-control" disabled type="text" asp-for="Book.Title"/>
+            <button class="btn btn-danger mt-3">Submit</button>
+        </div>
+    </div>
+
+</form>
