@@ -4,11 +4,21 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        <h1>Admin Panel</h1>
-        @RenderBody()
+    <div class="container-fluid">
+        <partial name="_NavBar"/>
+        <div class="row mt-2">
+            <div class="col-2">
+                <partial name="_SideBar" />
+            </div>
+            <div class="col-10">
+                @RenderBody()
+            </div>
+        </div>
     </div>
+    <script src="~/wwwroot/lib/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>
