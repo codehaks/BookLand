@@ -3,11 +3,21 @@
 @{
 }
 
-<h1>Books!</h1>
+<h1>Books</h1>
 
-@foreach (var book in Model.BookList)
-{
-    <p>
-        @book.Title
-    </p>
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var book in Model.BookList)
+        {
+            <tr>
+                <td>@book.Title</td>
+            </tr>
+        }
+    </tbody>
+</table>
