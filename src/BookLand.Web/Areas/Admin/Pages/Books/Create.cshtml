@@ -10,23 +10,27 @@
             <div class="mb-3">
                 <label asp-for="Book.Title" class="form-label"></label>
                 <input class="form-control" type="text" asp-for="Book.Title" />
+                <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
 
-             <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="Book.Author" class="form-label"></label>
                 <input class="form-control" type="text" asp-for="Book.Author" />
+                <span asp-validation-for="Book.Author" class="text-danger"></span>
             </div>
 
-             <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="Book.Year" class="form-label"></label>
                 <input class="form-control" type="number" asp-for="Book.Year" />
+                <span asp-validation-for="Book.Year" class="text-danger"></span>
             </div>
 
-             <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="Book.Pages" class="form-label"></label>
-                <input  class="form-control" type="number" asp-for="Book.Pages" min=1 />
+                <input class="form-control" type="number" asp-for="Book.Pages" min=1 />
+                <span asp-validation-for="Book.Pages" class="text-danger"></span>
             </div>
-            
+
             <button class="btn btn-primary mt-3">Submit</button>
         </div>
     </div>
