@@ -10,6 +10,9 @@
     <thead>
         <tr>
             <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Year</th>
+            <th scope="col">Pages</th>
             <th></th>
         </tr>
     </thead>
@@ -19,6 +22,9 @@
         {
             <tr>
                 <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Year</td>
+                <td>@book.Pages</td>
                 <td>
                     <a asp-page="./edit" asp-route-id="@book.Id" class="btn btn-primary">Edit</a>
                     <a asp-page="./details" asp-route-id="@book.Id" class="btn btn-info">Details</a>

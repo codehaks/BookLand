@@ -5,6 +5,23 @@
 
 <h1>Book Details</h1>
 
-<p>
-    Title : @Model.Book!.Title
-</p>
+<table class="table">
+    <tr>
+        <td>Title</td>
+        <td>@Model.Book.Title</td>
+    </tr>
+    <tr>
+        <td>Author</td>
+        <td>@Model.Book.Author</td>
+    </tr>
+    <tr>
+        <td>Year</td>
+        <td>@Model.Book.Year</td>
+    </tr>
+
+    <tr>
+        <td>Pages</td>
+        <td>@Model.Book.Pages</td>
+    </tr>
+</table>
+

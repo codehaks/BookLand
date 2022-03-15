@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BookLand.Web.Areas.Admin.Pages.Books
 {
-    
+
     public class EditModel : PageModel
     {
         private readonly BookLandDbContext _db;
@@ -26,7 +26,11 @@ namespace BookLand.Web.Areas.Admin.Pages.Books
         public IActionResult OnPost()
         {
             var book = _db.Books.Find(Book.Id);
-            book.Title=Book.Title;
+
+            book.Title = Book.Title;
+            book.Author = Book.Author;
+            book.Year = Book.Year;
+            book.Pages = Book.Pages;
 
             _db.SaveChanges();
             return RedirectToPage("./index");

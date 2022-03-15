@@ -18,12 +18,7 @@ namespace BookLand.Web.Areas.Admin.Pages.Books
         public Book? Book { get; set; }
         public IActionResult OnPost()
         {
-            var book = new Book
-            {
-                Title = Book.Title,
-            };
-
-            _db.Books.Add(book);
+            _db.Books.Add(Book);
             _db.SaveChanges();
             return RedirectToPage("./index");
         }
