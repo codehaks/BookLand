@@ -4,7 +4,7 @@
 
 namespace BookLand.Migrations
 {
-    public partial class BooksTable : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,10 @@ namespace BookLand.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false)
+                    Title = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Author = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Year = table.Column<int>(type: "INTEGER", nullable: false),
+                    Pages = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

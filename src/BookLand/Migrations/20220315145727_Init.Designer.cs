@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookLand.Migrations
 {
     [DbContext(typeof(BookLandDbContext))]
-    [Migration("20220315143515_BookInfoCols")]
-    partial class BookInfoCols
+    [Migration("20220315145727_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
