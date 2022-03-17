@@ -1,17 +1,34 @@
-﻿@page
+﻿@page "{term?}"
 @model BookLand.Web.Areas.Admin.Pages.Books.IndexModel
 @{
 }
 
 <h1>Books</h1>
 <a asp-page="./create" class="btn btn-primary">Create</a>
+
+<form method="get" class="form mt-3 inline">
+    <div class="input-group">
+        <input class="form-control" name="term" value="@Model.Term" placeholder="Term">
+        <button class="btn btn-primary" type="submit">Button</button>
+    </div>
+</form>
 <hr />
 <table class="table">
     <thead>
         <tr>
             <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Year</th>
+            <th scope="col">
+                <a asp-page="./index" asp-route-sortby="@Model.SortBy" asp-route-orderby="author">
+                    Author
+                </a>
+
+
+            </th>
+            <th scope="col">
+                <a asp-page="./index" asp-route-sortby="@Model.SortBy" asp-route-orderby="year">
+                    Year
+                </a>
+            </th>
             <th scope="col">Pages</th>
             <th></th>
         </tr>
