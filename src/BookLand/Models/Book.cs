@@ -21,4 +21,12 @@ public class Book
     [Required(ErrorMessage = "Page must be a number larger than 1")]
     public int Pages { get; set; } = 1;
 
+    public string Country { get; set; } = default!;
+
+    public string Language { get; set; } = default!;
+
+    public string ImageLink { get; set; } = default!;
+
+    public string Link { get; set; } = default!;
+
 }

@@ -25,7 +25,23 @@ namespace BookLand.Web.Areas.Admin.Pages.Books
 
         public IActionResult OnPost()
         {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
+
+            if (Book is null)
+            {
+                return Page();
+            }
+
             var book = _db.Books.Find(Book.Id);
+
+            if (book is null)
+            {
+                // TODO : Book not found
+                return RedirectToPage("./index");
+            }
 
             book.Title = Book.Title;
             book.Author = Book.Author;
