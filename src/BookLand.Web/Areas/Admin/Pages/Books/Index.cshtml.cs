@@ -1,5 +1,6 @@
 using BookLand.Data;
 using BookLand.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BookLand.Web.Areas.Admin.Pages.Books;
@@ -17,10 +18,36 @@ public class IndexModel : PageModel
 
     public string Term { get; set; }
     public string SortBy { get; set; }
-    public void OnGet(string term = "", string orderBy = "author", string sortBy = "asc")
+
+    [BindProperty]
+    public string SelectedLanguage { get; set; }
+    public void OnGet(string term = "", string orderBy = "author", string sortBy = "asc",string selectedLanguage="All")
     {
         IQueryable<Book> booksQuery = _db.Books;
+        booksQuery = OrdeBooks(orderBy, sortBy, booksQuery);
+        sortBy = GetSortBy(sortBy);
+        SortBy = sortBy;
 
+        if (string.IsNullOrEmpty(term) == false)
+        {
+            booksQuery = booksQuery
+                .Where(b => b.Title.ToLower()
+                .Contains(term.ToLower()));
+        }
+
+        if (string.IsNullOrEmpty(selectedLanguage) ==false && selectedLanguage != "All")
+        {
+            booksQuery=booksQuery.Where(b=>b.Language== selectedLanguage);
+        }
+
+        BookList = booksQuery.ToList();
+        Term = term;
+        SelectedLanguage = selectedLanguage;
+
+    }
+
+    private static IQueryable<Book> OrdeBooks(string orderBy, string sortBy, IQueryable<Book> booksQuery)
+    {
         if (orderBy == "year")
         {
             if (sortBy == "asc")
@@ -46,21 +73,7 @@ public class IndexModel : PageModel
             }
         }
 
-        sortBy = GetSortBy(sortBy);
-
-        SortBy = sortBy;
-
-
-        if (string.IsNullOrEmpty(term) == false)
-        {
-            booksQuery = booksQuery
-                .Where(b => b.Title.ToLower()
-                .Contains(term.ToLower()));
-        }
-
-        BookList = booksQuery.ToList();
-        Term = term;
-
+        return booksQuery;
     }
 
     private static string GetSortBy(string sortBy)
