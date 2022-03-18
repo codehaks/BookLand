@@ -3,9 +3,15 @@
 @{
 }
 
-<form method="post" class="form">
+<form method="post" class="form" enctype="multipart/form-data">
     <div class="row">
         <div class="col-6">
+
+             <div class="mb-3">
+                <label asp-for="ImageFile" class="form-label"></label>
+                <input class="form-control" type="file" asp-for="ImageFile" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
 
             <div class="mb-3">
                 <label asp-for="Book.Title" class="form-label"></label>
@@ -20,6 +26,18 @@
             </div>
 
             <div class="mb-3">
+                <label asp-for="Book.Language" class="form-label"></label>
+                <input class="form-control" type="text" asp-for="Book.Language" />
+                <span asp-validation-for="Book.Language" class="text-danger"></span>
+            </div>
+
+             <div class="mb-3">
+                <label asp-for="Book.Country" class="form-label"></label>
+                <input class="form-control" type="text" asp-for="Book.Country" />
+                <span asp-validation-for="Book.Country" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
                 <label asp-for="Book.Year" class="form-label"></label>
                 <input class="form-control" type="number" asp-for="Book.Year" />
                 <span asp-validation-for="Book.Year" class="text-danger"></span>
@@ -29,6 +47,12 @@
                 <label asp-for="Book.Pages" class="form-label"></label>
                 <input class="form-control" type="number" asp-for="Book.Pages" min=1 />
                 <span asp-validation-for="Book.Pages" class="text-danger"></span>
+            </div>
+
+             <div class="mb-3">
+                <label asp-for="Book.Link" class="form-label"></label>
+                <input class="form-control" type="text" asp-for="Book.Link" />
+                <span asp-validation-for="Book.Link" class="text-danger"></span>
             </div>
 
             <button class="btn btn-primary mt-3">Submit</button>
