@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookLand.Data;
 
-public class BookLandDbContext : IdentityDbContext
+public class BookLandDbContext : IdentityDbContext<ApplicationUser>
 {
     public BookLandDbContext(DbContextOptions<BookLandDbContext> options)
         : base(options)

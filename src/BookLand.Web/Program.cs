@@ -1,4 +1,5 @@
 using BookLand.Data;
+using BookLand.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,13 +17,17 @@ builder.Services.AddDbContext<BookLandDbContext>(options =>
     options.LogTo(Console.WriteLine);
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>
+builder.Services.AddDefaultIdentity<ApplicationUser>
     (options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BookLandDbContext>();
 
 var app = builder.Build();
 
 app.UseStaticFiles();
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapRazorPages();
 
