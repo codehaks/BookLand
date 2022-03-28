@@ -1,0 +1,29 @@
+﻿@page
+@model BookLand.Web.Pages.Shop.DetailsModel
+@{
+}
+
+<h1>Book Details</h1>
+
+<img src="~/@Model.Book.ImageLink" class="img-fluid"/>
+
+<table class="table">
+    <tr>
+        <td>Title</td>
+        <td>@Model.Book.Title</td>
+    </tr>
+    <tr>
+        <td>Author</td>
+        <td>@Model.Book.Author</td>
+    </tr>
+    <tr>
+        <td>Year</td>
+        <td>@Model.Book.Year</td>
+    </tr>
+
+    <tr>
+        <td>Pages</td>
+        <td>@Model.Book.Pages</td>
+    </tr>
+</table>
+
