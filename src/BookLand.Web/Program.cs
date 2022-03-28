@@ -5,7 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages().AddMvcOptions(options =>
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("admin"));
+});
+
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeAreaFolder("Admin", "/", "RequireAdminRole");
+
+}).AddMvcOptions(options =>
 {
     options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
         _ => "The field is required.");
@@ -17,9 +26,11 @@ builder.Services.AddDbContext<BookLandDbContext>(options =>
     options.LogTo(Console.WriteLine);
 });
 
-builder.Services.AddDefaultIdentity<ApplicationUser>
+builder.Services.AddIdentity<ApplicationUser,IdentityRole>
     (options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BookLandDbContext>();
+
+
 
 var app = builder.Build();
 

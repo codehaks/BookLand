@@ -10,7 +10,7 @@ public class CreateModel : PageModel
 {
     private readonly BookLandDbContext _db;
     private readonly IWebHostEnvironment _webHostEnvironment;
-
+    
     public CreateModel(BookLandDbContext db, IWebHostEnvironment webHostEnvironment)
     {
         _db = db;

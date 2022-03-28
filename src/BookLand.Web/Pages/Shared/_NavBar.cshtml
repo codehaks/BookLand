@@ -20,10 +20,13 @@
                         <a class="nav-link text-dark" asp-page="/Index" asp-area="user">User</a>
                     </li>
 
-
+                    @if (User.IsInRole("admin"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-page="/Index" asp-area="admin">Admin</a>
-                    </li>
+                    </li>    
+                    }
+                    
                 }
 
             </ul>
