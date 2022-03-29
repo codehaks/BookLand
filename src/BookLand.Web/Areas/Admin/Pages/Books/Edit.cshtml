@@ -8,7 +8,14 @@
 <form method="post" class="form">
     <div class="row">
         <div class="col-6">
-            <input asp-for="Id" hidden />            
+            <input asp-for="Id" hidden />
+
+            <div class="mb-3">
+                <label asp-for="BookInputModel.CategoryId" class="form-label">Category</label>
+                <select asp-for="BookInputModel.CategoryId" asp-items="Model.CategoySelectList"></select>
+            </div>
+
+
 
             <div class="mb-3">
                 <label asp-for="BookInputModel.Title" class="form-label"></label>

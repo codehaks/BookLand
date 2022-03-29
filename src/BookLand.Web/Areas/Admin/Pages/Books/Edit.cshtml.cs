@@ -3,6 +3,7 @@ using BookLand.Models;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookLand.Web.Areas.Admin.Pages.Books;
 
@@ -21,11 +22,16 @@ public class EditModel : PageModel
     [BindProperty]
     public BookInputModel BookInputModel { get; set; }
 
+    public SelectList CategoySelectList { get; set; }
+
     public void OnGet(int id)
     {
         var book = _db.Books.Find(id);
         Id = id;
         BookInputModel = book.Adapt<BookInputModel>();
+
+        var cats = _db.Categories.ToList();
+        CategoySelectList = new SelectList(cats, "Id", "Name");
     }
 
     public IActionResult OnPost()
