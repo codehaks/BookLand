@@ -12,6 +12,7 @@ public class BookLandDbContext : IdentityDbContext<ApplicationUser>
     }
 
     public DbSet<Book> Books { get; set; }
+    public DbSet<Category> Categories { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
