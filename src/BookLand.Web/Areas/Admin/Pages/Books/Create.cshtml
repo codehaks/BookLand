@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-6">
 
-             <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="ImageFile" class="form-label"></label>
                 <input class="form-control" type="file" asp-for="ImageFile" />
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
@@ -17,6 +17,12 @@
                 <label asp-for="BookInputModel.Title" class="form-label"></label>
                 <input class="form-control" type="text" asp-for="BookInputModel.Title" />
                 <span asp-validation-for="BookInputModel.Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BookInputModel.Price" class="form-label"></label>
+                <input class="form-control" type="text" asp-for="BookInputModel.Price" />
+                <span asp-validation-for="BookInputModel.Price" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
@@ -31,7 +37,7 @@
                 <span asp-validation-for="BookInputModel.Language" class="text-danger"></span>
             </div>
 
-             <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="BookInputModel.Country" class="form-label"></label>
                 <input class="form-control" type="text" asp-for="BookInputModel.Country" />
                 <span asp-validation-for="BookInputModel.Country" class="text-danger"></span>
@@ -49,7 +55,7 @@
                 <span asp-validation-for="BookInputModel.Pages" class="text-danger"></span>
             </div>
 
-             <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="BookInputModel.Link" class="form-label"></label>
                 <input class="form-control" type="text" asp-for="BookInputModel.Link" />
                 <span asp-validation-for="BookInputModel.Link" class="text-danger"></span>

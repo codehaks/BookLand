@@ -12,7 +12,7 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddRazorPages(options =>
 {
-    options.Conventions.AuthorizeAreaFolder("Admin", "/", "RequireAdminRole");
+    //options.Conventions.AuthorizeAreaFolder("Admin", "/", "RequireAdminRole");
 
 }).AddMvcOptions(options =>
 {
@@ -26,7 +26,7 @@ builder.Services.AddDbContext<BookLandDbContext>(options =>
     options.LogTo(Console.WriteLine);
 });
 
-builder.Services.AddIdentity<ApplicationUser,IdentityRole>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>
     (options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<BookLandDbContext>();
 

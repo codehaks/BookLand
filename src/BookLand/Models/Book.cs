@@ -5,10 +5,13 @@ namespace BookLand.Models;
 public class Book
 {
     public int Id { get; set; }
+
     [Required(ErrorMessage ="Title can not be empty")]
     [MaxLength(100)]
     public string Title { get; set; } = default!;
 
+    public int Price { get; set; }
+    
     [Required(ErrorMessage = "Author can not be empty")]
     [MaxLength(100)]
     public string Author { get; set; } = default!;

@@ -1,55 +1,60 @@
 using BookLand.Data;
 using BookLand.Models;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BookLand.Web.Areas.Admin.Pages.Books
+namespace BookLand.Web.Areas.Admin.Pages.Books;
+
+public class EditModel : PageModel
 {
+    private readonly BookLandDbContext _db;
 
-    public class EditModel : PageModel
+    public EditModel(BookLandDbContext db)
     {
-        private readonly BookLandDbContext _db;
+        _db = db;
+    }
 
-        public EditModel(BookLandDbContext db)
+    [BindProperty]
+    public int Id { get; set; }
+
+    [BindProperty]
+    public BookInputModel BookInputModel { get; set; }
+
+    public void OnGet(int id)
+    {
+        var book = _db.Books.Find(id);
+        Id = id;
+        BookInputModel = book.Adapt<BookInputModel>();
+    }
+
+    public IActionResult OnPost()
+    {
+        if (ModelState.IsValid == false)
         {
-            _db = db;
+            return Page();
         }
 
-        [BindProperty]
-        public Book? Book { get; set; }
-
-        public void OnGet(int id)
+        if (BookInputModel is null)
         {
-            Book = _db.Books.Find(id);
+            return Page();
         }
 
-        public IActionResult OnPost()
+        var book = _db.Books.Find(Id);
+
+        if (book is null)
         {
-            if (ModelState.IsValid == false)
-            {
-                return Page();
-            }
-
-            if (Book is null)
-            {
-                return Page();
-            }
-
-            var book = _db.Books.Find(Book.Id);
-
-            if (book is null)
-            {
-                // TODO : Book not found
-                return RedirectToPage("./index");
-            }
-
-            book.Title = Book.Title;
-            book.Author = Book.Author;
-            book.Year = Book.Year;
-            book.Pages = Book.Pages;
-
-            _db.SaveChanges();
+            // TODO : Book not found
             return RedirectToPage("./index");
         }
+
+        book.Title = BookInputModel.Title;
+        book.Author = BookInputModel.Author;
+        book.Year = BookInputModel.Year;
+        book.Pages = BookInputModel.Pages;
+        book.Price = BookInputModel.Price;
+
+        _db.SaveChanges();
+        return RedirectToPage("./index");
     }
 }

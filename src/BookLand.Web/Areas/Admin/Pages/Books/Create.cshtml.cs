@@ -77,6 +77,10 @@ public class BookInputModel
     [MaxLength(100)]
     public string Title { get; set; } = default!;
 
+    [Required(ErrorMessage = "Price can not be empty")]
+    [Range(minimum:0,maximum:1000)]
+    public int Price { get; set; }
+
     [Required(ErrorMessage = "Author can not be empty")]
     [MaxLength(100)]
     public string Author { get; set; } = default!;
