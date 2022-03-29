@@ -7,7 +7,7 @@ public class Book
     public int Id { get; set; }
 
     public Category Category { get; set; }
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
     [Required(ErrorMessage ="Title can not be empty")]
     [MaxLength(100)]
