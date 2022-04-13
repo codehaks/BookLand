@@ -40,6 +40,7 @@
         <tr>
             <th scope="col">Title</th>
             <th scope="col">Price</th>
+            <th scope="col">Category</th>
             <th scope="col">
                 <a asp-page="./index" asp-route-term="@Model.Term" asp-route-sortby="@Model.SortBy" asp-route-orderby="author">
                     Author
@@ -63,6 +64,13 @@
             <tr>
                 <td>@book.Title</td>
                 <td>@book.Price</td>
+                <td>
+                    @if (book.Category is not null)
+                    {
+                        @book.Category.Name
+                    }
+
+                </td>
                 <td>@book.Author</td>
                 <td>@book.Year</td>
                 <td>@book.Pages</td>

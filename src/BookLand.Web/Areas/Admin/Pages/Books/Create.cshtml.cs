@@ -73,7 +73,7 @@ public class CreateModel : PageModel
 
 public class BookInputModel
 {
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
     [Required(ErrorMessage = "Title can not be empty")]
     [MaxLength(100)]

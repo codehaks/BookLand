@@ -3,6 +3,7 @@ using BookLand.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookLand.Web.Areas.Admin.Pages.Books;
 
@@ -24,7 +25,8 @@ public class IndexModel : PageModel
     public string SelectedLanguage { get; set; }
     public void OnGet(string term = "", string orderBy = "author", string sortBy = "asc",string selectedLanguage="All")
     {
-        IQueryable<Book> booksQuery = _db.Books;
+        IQueryable<Book> booksQuery = _db.Books.Include(b=>b.Category);
+
         booksQuery = OrdeBooks(orderBy, sortBy, booksQuery);
         sortBy = GetSortBy(sortBy);
         SortBy = sortBy;

@@ -31,7 +31,7 @@ public class EditModel : PageModel
         BookInputModel = book.Adapt<BookInputModel>();
 
         var cats = _db.Categories.ToList();
-        CategoySelectList = new SelectList(cats, "Id", "Name");
+        CategoySelectList = new SelectList(cats, "Id", "Name",book.CategoryId);
     }
 
     public IActionResult OnPost()
@@ -59,6 +59,7 @@ public class EditModel : PageModel
         book.Year = BookInputModel.Year;
         book.Pages = BookInputModel.Pages;
         book.Price = BookInputModel.Price;
+        book.CategoryId = BookInputModel.CategoryId;
 
         _db.SaveChanges();
         return RedirectToPage("./index");
