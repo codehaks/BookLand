@@ -1,0 +1,30 @@
+﻿@page
+@model BookLand.Web.Pages.Shop.OrderModel
+@{
+}
+
+
+<h1>Order Book</h1>
+
+<img src="~/@Model.Book.ImageLink" class="img-fluid" />
+
+<table class="table">
+    <tr>
+        <td>Title</td>
+        <td>@Model.Book.Title</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>@Model.Book.Price</td>
+    </tr>
+       <tr>
+        <td>Address</td>
+        <td>@Model.Address</td>
+    </tr>
+
+</table>
+
+<form method="post" class="mb-5">
+    <input asp-for="BookId" hidden />
+    <button class="btn btn-primary mb-5">Purchase</button>
+</form>

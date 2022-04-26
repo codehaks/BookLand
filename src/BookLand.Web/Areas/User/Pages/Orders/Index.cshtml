@@ -1,0 +1,26 @@
+﻿@page
+@model BookLand.Web.Areas.User.Pages.Orders.IndexModel
+@{
+}
+
+<h1>My Orders</h1>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Price</th>
+            <th>Order Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.OrderList)
+        {
+            <tr>
+                <td>@order.Amount</td>
+                <td>@order.TimeCreated</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
