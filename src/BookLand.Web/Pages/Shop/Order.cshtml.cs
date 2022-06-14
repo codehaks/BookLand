@@ -55,6 +55,8 @@ public class OrderModel : PageModel
         _db.Orders.Add(order);
         await _db.SaveChangesAsync();
 
-        return RedirectToPage("./index");
+        TempData["success"] = "Your order confirmed.";
+
+        return RedirectToPage("/orders/index",new {area="user" });
     }
 }

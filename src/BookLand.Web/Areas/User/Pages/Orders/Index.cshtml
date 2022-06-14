@@ -6,6 +6,13 @@
 <h1>My Orders</h1>
 <hr />
 
+@if (TempData["success"] is not null)
+{
+    <span class="alert alert-success">
+        @TempData["success"]
+    </span>
+}
+
 <table class="table">
     <thead>
         <tr>

@@ -1,6 +1,8 @@
 using BookLand.Data;
 using BookLand.Models;
+using BookLand.Web.Common;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +30,11 @@ builder.Services.AddDbContext<BookLandDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>
     (options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<BookLandDbContext>();
+    .AddEntityFrameworkStores<BookLandDbContext>().AddDefaultTokenProviders(); ;
+
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
 
 
 
