@@ -9,21 +9,8 @@
     @foreach (var book in Model.BookList)
     {
         <div class="col-4 text-center">
-            <a asp-page="./details" asp-route-id="@book.Id" asp-area="">
-                <img src="@book.ImageLink" alt="@book.Title" class="img-fluid" style="max-height:200px" />
-                <p>
-                    <strong>
-                        @book.Title
-                    </strong>
-                </p>
-                     <p>
-                    <strong>
-                        @book.Price
-                    </strong>
-                </p>
-            </a>
+            <partial name="_BookItem" model="book" />
         </div>
-
     }
 
 </div>

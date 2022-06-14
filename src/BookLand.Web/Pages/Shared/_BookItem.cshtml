@@ -1,0 +1,15 @@
+﻿@model BookLand.Models.Book
+
+<a asp-page="./details" asp-route-id="@Model.Id" asp-area="">
+    <img src="@Model.ImageLink" alt="@Model.Title" class="img-fluid" style="max-height:200px" />
+    <p>
+        <strong>
+            @Model.Title
+        </strong>
+    </p>
+    <p>
+        <strong>
+            @Model.Price
+        </strong>
+    </p>
+</a>
