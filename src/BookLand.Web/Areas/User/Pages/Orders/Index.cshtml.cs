@@ -21,7 +21,7 @@ public class IndexModel : PageModel
 
         if (string.IsNullOrEmpty(userName))
         {
-            // retutn not found!
+            // return not found!
             return RedirectToPage("./notfound");
         }
 
