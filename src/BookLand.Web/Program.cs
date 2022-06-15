@@ -1,11 +1,16 @@
 using BookLand.Data;
 using BookLand.Models;
 using BookLand.Web.Common;
+using BookLand.Web.Events;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMediatR(typeof(UserCreatedEvent).GetTypeInfo().Assembly);
 
 builder.Services.AddAuthorization(options =>
 {

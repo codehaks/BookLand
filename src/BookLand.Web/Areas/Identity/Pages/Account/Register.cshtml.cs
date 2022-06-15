@@ -19,6 +19,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using MediatR;
+using BookLand.Web.Events;
+using BookLand.Migrations;
+using FluentAssertions.Equivalency;
 
 namespace BookLand.Web.Areas.Identity.Pages.Account
 {
@@ -30,13 +34,14 @@ namespace BookLand.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly IMediator _mediator;
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IMediator mediator)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +49,7 @@ namespace BookLand.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -135,17 +141,11 @@ namespace BookLand.Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await _mediator.Publish(new UserCreatedEvent.Notification()
+                    {
+                        User = user,
+                        ReturnUrl = returnUrl,
+                    });
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
