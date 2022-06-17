@@ -4,8 +4,15 @@ using BookLand.Web.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((builder, logger) =>
+{
+    logger.ReadFrom.Configuration(builder.Configuration);
+});
 
 builder.Services.AddAuthorization(options =>
 {
@@ -25,7 +32,6 @@ builder.Services.AddRazorPages(options =>
 builder.Services.AddDbContext<BookLandDbContext>(options =>
 {
     options.UseSqlite("Data Source=bookland.sqlite");
-    options.LogTo(Console.WriteLine);
 });
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>
