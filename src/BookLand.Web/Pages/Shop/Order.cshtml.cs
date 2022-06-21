@@ -1,5 +1,7 @@
 using BookLand.Data;
 using BookLand.Models;
+using BookLand.Web.Events.OrderCreated;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,10 +12,12 @@ public class OrderModel : PageModel
 {
     private readonly BookLandDbContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
-    public OrderModel(BookLandDbContext db, UserManager<ApplicationUser> userManager)
+    private readonly IMediator _mediator;
+    public OrderModel(BookLandDbContext db, UserManager<ApplicationUser> userManager, IMediator mediator)
     {
         _db = db;
         _userManager = userManager;
+        _mediator = mediator;
     }
 
     public Book? Book { get; set; }
@@ -42,7 +46,7 @@ public class OrderModel : PageModel
         var book = _db.Books.Find(BookId);
         var userName = User?.Identity?.Name;
         var user = await _userManager.FindByNameAsync(userName);
- 
+
         var order = new Order
         {
             Amount = book.Price,
@@ -57,6 +61,17 @@ public class OrderModel : PageModel
 
         TempData["success"] = "Your order confirmed.";
 
-        return RedirectToPage("/orders/index",new {area="user" });
+        await _mediator.Publish(new OrderCreatedNotification()
+        {
+            OrderId = order.Id,
+            UserName = userName
+        });
+
+        // Send email
+        // Notify Admin
+        // Notify Accounting
+        // Notify Warehouse
+
+        return RedirectToPage("/orders/index", new { area = "user" });
     }
 }

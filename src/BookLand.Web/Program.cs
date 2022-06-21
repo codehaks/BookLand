@@ -1,11 +1,16 @@
 using BookLand.Data;
 using BookLand.Models;
 using BookLand.Web.Common;
+using FluentAssertions.Common;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using System.Net.NetworkInformation;
+using System.Reflection;
+using System.Security.Policy;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +18,8 @@ builder.Host.UseSerilog((builder, logger) =>
 {
     logger.ReadFrom.Configuration(builder.Configuration);
 });
+
+builder.Services.AddMediatR(typeof(Program).GetTypeInfo().Assembly);
 
 builder.Services.AddAuthorization(options =>
 {
