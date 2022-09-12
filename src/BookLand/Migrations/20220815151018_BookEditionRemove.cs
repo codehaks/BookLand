@@ -4,24 +4,23 @@
 
 namespace BookLand.Migrations
 {
-    public partial class BookPriceCol : Migration
+    public partial class BookEditionRemove : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Price",
-                table: "Books",
-                type: "INTEGER",
-                maxLength: 100,
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.DropColumn(
+                name: "Edition",
+                table: "Books");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Price",
-                table: "Books");
+            migrationBuilder.AddColumn<int>(
+                name: "Edition",
+                table: "Books",
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: 0);
         }
     }
 }
