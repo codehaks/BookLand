@@ -36,14 +36,19 @@ builder.Services.AddRazorPages(options =>
         _ => "The field is required.");
 });
 
-builder.Services.AddDbContext<BookLandDbContext>(options =>
+builder.Services.AddDbContext<ShopDbContext>(options =>
 {
-    options.UseSqlite("Data Source=bookland.sqlite");
+    options.UseSqlite("Data Source=shop.sqlite");
+});
+
+builder.Services.AddDbContext<UserDbContext>(options =>
+{
+    options.UseSqlite("Data Source=user.sqlite");
 });
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>
     (options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<BookLandDbContext>().AddDefaultTokenProviders(); ;
+    .AddEntityFrameworkStores<UserDbContext>().AddDefaultTokenProviders(); ;
 
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();

@@ -8,10 +8,10 @@ namespace BookLand.Web.Pages.Shop
 {
     public class IndexModel : PageModel
     {
-        private readonly BookLandDbContext _db;
+        private readonly ShopDbContext _db;
         
 
-        public IndexModel(BookLandDbContext db)
+        public IndexModel(ShopDbContext db)
         {
             _db = db;
 

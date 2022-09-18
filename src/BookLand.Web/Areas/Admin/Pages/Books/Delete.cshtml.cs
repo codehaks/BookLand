@@ -7,9 +7,9 @@ namespace BookLand.Web.Areas.Admin.Pages.Books
 {
     public class DeleteModel : PageModel
     {
-        private readonly BookLandDbContext _db;
+        private readonly ShopDbContext _db;
 
-        public DeleteModel(BookLandDbContext db)
+        public DeleteModel(ShopDbContext db)
         {
             _db = db;
         }

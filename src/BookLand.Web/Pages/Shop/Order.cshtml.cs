@@ -10,10 +10,10 @@ namespace BookLand.Web.Pages.Shop;
 
 public class OrderModel : PageModel
 {
-    private readonly BookLandDbContext _db;
+    private readonly ShopDbContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IMediator _mediator;
-    public OrderModel(BookLandDbContext db, UserManager<ApplicationUser> userManager, IMediator mediator)
+    public OrderModel(ShopDbContext db, UserManager<ApplicationUser> userManager, IMediator mediator)
     {
         _db = db;
         _userManager = userManager;

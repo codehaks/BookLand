@@ -7,9 +7,9 @@ namespace BookLand.Web.Areas.Admin.Pages.Books
 {
     public class DetailsModel : PageModel
     {
-        private readonly BookLandDbContext _db;
+        private readonly ShopDbContext _db;
 
-        public DetailsModel(BookLandDbContext db)
+        public DetailsModel(ShopDbContext db)
         {
             _db = db;
         }

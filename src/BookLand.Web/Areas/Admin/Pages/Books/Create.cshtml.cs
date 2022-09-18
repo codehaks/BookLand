@@ -9,10 +9,10 @@ namespace BookLand.Web.Areas.Admin.Pages.Books;
 
 public class CreateModel : PageModel
 {
-    private readonly BookLandDbContext _db;
+    private readonly ShopDbContext _db;
     private readonly IWebHostEnvironment _webHostEnvironment;
     
-    public CreateModel(BookLandDbContext db, IWebHostEnvironment webHostEnvironment)
+    public CreateModel(ShopDbContext db, IWebHostEnvironment webHostEnvironment)
     {
         _db = db;
         BookInputModel = new BookInputModel

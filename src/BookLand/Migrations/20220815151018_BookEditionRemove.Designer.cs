@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookLand.Migrations
 {
-    [DbContext(typeof(BookLandDbContext))]
+    [DbContext(typeof(UserDbContext))]
     [Migration("20220815151018_BookEditionRemove")]
     partial class BookEditionRemove
     {

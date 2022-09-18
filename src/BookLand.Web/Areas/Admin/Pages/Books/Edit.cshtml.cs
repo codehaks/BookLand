@@ -9,9 +9,9 @@ namespace BookLand.Web.Areas.Admin.Pages.Books;
 
 public class EditModel : PageModel
 {
-    private readonly BookLandDbContext _db;
+    private readonly ShopDbContext _db;
 
-    public EditModel(BookLandDbContext db)
+    public EditModel(ShopDbContext db)
     {
         _db = db;
     }
