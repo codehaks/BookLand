@@ -2,6 +2,7 @@ using BookLand.Data;
 using BookLand.Models;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
@@ -31,13 +32,25 @@ public class CreateModel : PageModel
     public async Task<IActionResult> OnPost()
     {
         var fileName= BookInputModel.Title.ToLower().Replace(" ", " - ") + ".jpg";
-        if (ImageFile!=null)
+
+        byte[] imageContent=Array.Empty<byte>();
+
+         if (ImageFile!=null)
         {
-            var path = _webHostEnvironment.WebRootPath + @"\images\" + fileName;
-            
+            // Save file disk
+            var path = _webHostEnvironment.WebRootPath + @"\images\" + fileName;            
             using var stream = System.IO.File.Create(path);
             stream.Position = 0;
             await ImageFile.CopyToAsync(stream);
+
+            // save to database
+
+            using var memoryStream = new MemoryStream();
+            ImageFile.CopyTo(memoryStream);
+            memoryStream.Position = 0;
+            imageContent= memoryStream.ToArray();
+
+
         }
 
         var imageLink = "images/" + fileName;
@@ -62,7 +75,8 @@ public class CreateModel : PageModel
             Country = BookInputModel.Country,
             ImageLink = imageLink,
             Language = BookInputModel.Language,
-            Link = BookInputModel.Link
+            Link = BookInputModel.Link,
+            ImageData=imageContent
         };
 
         _db.Books.Add(book);

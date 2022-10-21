@@ -33,6 +33,8 @@ public class Book
 
     public string ImageLink { get; set; } = default!;
 
+    public byte[] ImageData { get; set; } = default!;
+
     public string Link { get; set; } = default!;
 
 }

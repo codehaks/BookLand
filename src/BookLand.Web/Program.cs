@@ -38,7 +38,7 @@ builder.Services.AddRazorPages(options =>
 
 builder.Services.AddDbContext<BookLandDbContext>(options =>
 {
-    options.UseSqlite("Data Source=bookland.sqlite");
+    options.UseSqlite("Data Source=bookland-v2.sqlite");
 });
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>
