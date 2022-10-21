@@ -5,7 +5,8 @@
 
 <h1>Book Details</h1>
 
-<img src="@("/api/book/image/"+Model.Book.Id)" class="img-fluid" />
+
+<img src="data:image/png;base64,@Convert.ToBase64String(Model.Book.ImageData)" alt="Red dot" />
 
 <table class="table">
     <tr>
