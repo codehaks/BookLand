@@ -1,31 +1,54 @@
-﻿using MediatR;
+﻿using BookLand.Data;
+using BookLand.Models;
+using Mapster;
+using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookLand.Application.Books.Commands;
 
 public class CreateBook
 {
-    // Req
-    // Handler
-    // Res
 
-    public class Request:IRequest<Response>
+    public class Command:IRequest<Unit>
     {
-        public int Number { get; set; }
+
+        public string Title { get; set; } = default!;
+
+        public int Price { get; set; }
+
+        public string Author { get; set; } = default!;
+
+        public int Year { get; set; } = default;
+      
+        public int Pages { get; set; } = 1;
+
+        public string Country { get; set; } = default!;
+
+        public string Language { get; set; } = default!;
+
+        public string ImageLink { get; set; } = default!;
+
+        public string Link { get; set; } = default!;
     }
 
-    public class Response
+    public class Handler : IRequestHandler<Command, Unit>
     {
-        
-    }
+        private readonly BookLandDbContext _db;
 
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+        public Handler(BookLandDbContext db)
         {
-            await Task.CompletedTask;
-            request.Number= request.Number + 1;
+            _db = db;
+        }
 
-            return new Response();
+        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+        {
+
+            var book = request.Adapt<Book>();
+
+            _db.Books.Add(book);
+            _db.SaveChanges();
+
+            return Unit.Value; 
         }
     }
 

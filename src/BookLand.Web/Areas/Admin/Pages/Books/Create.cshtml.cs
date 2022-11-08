@@ -12,13 +12,12 @@ namespace BookLand.Web.Areas.Admin.Pages.Books;
 public class CreateModel : PageModel
 {
     private readonly IMediator _mediator;
-    private readonly BookLandDbContext _db;
     private readonly IWebHostEnvironment _webHostEnvironment;
     
-    public CreateModel(IMediator mediator, BookLandDbContext db, IWebHostEnvironment webHostEnvironment)
+    public CreateModel(IMediator mediator, IWebHostEnvironment webHostEnvironment)
     {
         _mediator = mediator;
-        _db = db;
+ 
         BookInputModel = new BookInputModel
         {
             Year = 0,
@@ -34,25 +33,22 @@ public class CreateModel : PageModel
     public IFormFile? ImageFile { get; set; }
     public async Task<IActionResult> OnPost()
     {
-        await _mediator.Send(new CreateBook.Request { Number = 10 });
-        return RedirectToPage("./index");
-
-
-        var fileName= BookInputModel.Title.ToLower().Replace(" ", " - ") + ".jpg";
-        if (ImageFile!=null)
+        #region File and validation
+        var fileName = BookInputModel.Title.ToLower().Replace(" ", " - ") + ".jpg";
+        if (ImageFile != null)
         {
             var path = _webHostEnvironment.WebRootPath + @"\images\" + fileName;
-            
+
             using var stream = System.IO.File.Create(path);
             stream.Position = 0;
             await ImageFile.CopyToAsync(stream);
         }
 
-        var imageLink = "images/" + fileName;
+
 
         ModelState.Remove("ImageLink");
 
-        if (ModelState.IsValid==false)
+        if (ModelState.IsValid == false)
         {
             return Page();
         }
@@ -61,8 +57,10 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        var book = new Book
-        {
+        var imageLink = "images/" + fileName; 
+        #endregion
+
+        await _mediator.Send(new CreateBook.Command {
             Title = BookInputModel.Title,
             Year = BookInputModel.Year,
             Pages = BookInputModel.Pages,
@@ -71,10 +69,8 @@ public class CreateModel : PageModel
             ImageLink = imageLink,
             Language = BookInputModel.Language,
             Link = BookInputModel.Link
-        };
+        });
 
-        _db.Books.Add(book);
-        _db.SaveChanges();
         return RedirectToPage("./index");
     }
 }
