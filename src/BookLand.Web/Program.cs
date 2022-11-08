@@ -47,8 +47,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>
 
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-
-
+builder.Services.AddMediatR(typeof(ApplicationUser));
 
 
 var app = builder.Build();

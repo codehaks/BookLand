@@ -1,6 +1,8 @@
+using BookLand.Application.Books.Commands;
 using BookLand.Data;
 using BookLand.Models;
 using FluentAssertions;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -9,11 +11,13 @@ namespace BookLand.Web.Areas.Admin.Pages.Books;
 
 public class CreateModel : PageModel
 {
+    private readonly IMediator _mediator;
     private readonly BookLandDbContext _db;
     private readonly IWebHostEnvironment _webHostEnvironment;
     
-    public CreateModel(BookLandDbContext db, IWebHostEnvironment webHostEnvironment)
+    public CreateModel(IMediator mediator, BookLandDbContext db, IWebHostEnvironment webHostEnvironment)
     {
+        _mediator = mediator;
         _db = db;
         BookInputModel = new BookInputModel
         {
@@ -30,6 +34,10 @@ public class CreateModel : PageModel
     public IFormFile? ImageFile { get; set; }
     public async Task<IActionResult> OnPost()
     {
+        await _mediator.Send(new CreateBook.Request { Number = 10 });
+        return RedirectToPage("./index");
+
+
         var fileName= BookInputModel.Title.ToLower().Replace(" ", " - ") + ".jpg";
         if (ImageFile!=null)
         {
