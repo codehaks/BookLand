@@ -27,7 +27,7 @@ public class IndexModel : PageModel
     {
         IQueryable<Book> booksQuery = _db.Books.Include(b=>b.Category);
 
-        booksQuery = OrdeBooks(orderBy, sortBy, booksQuery);
+        booksQuery = OrderBooks(orderBy, sortBy, booksQuery);
         sortBy = GetSortBy(sortBy);
         SortBy = sortBy;
 
@@ -49,7 +49,7 @@ public class IndexModel : PageModel
 
     }
 
-    private static IQueryable<Book> OrdeBooks(string orderBy, string sortBy, IQueryable<Book> booksQuery)
+    private static IQueryable<Book> OrderBooks(string orderBy, string sortBy, IQueryable<Book> booksQuery)
     {
         if (orderBy == "year")
         {
