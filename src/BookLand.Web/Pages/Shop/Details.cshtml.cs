@@ -1,5 +1,8 @@
+using BookLand.Application.Books.Queries;
 using BookLand.Data;
 using BookLand.Models;
+using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,17 +10,38 @@ namespace BookLand.Web.Pages.Shop;
 
 public class DetailsModel : PageModel
 {
-    private readonly BookLandDbContext _db;
+    private readonly IMediator _mediator;
 
-    public DetailsModel(BookLandDbContext db)
+    public DetailsModel(IMediator mediator)
     {
-        _db = db;
+        _mediator = mediator;
     }
 
-    public Book? Book { get; set; }
+    public BookDetailsModel Book { get; set; }
 
-    public void OnGet(int id)
+    public async Task<IActionResult> OnGet(int id, CancellationToken cancellationToken)
     {
-        Book = _db.Books.Find(id);
+        var response = await _mediator.Send(new FindBook.Query { Id = id },cancellationToken);
+        Book=response.Adapt<BookDetailsModel>();
+        return Page();
     }
+}
+
+public class BookDetailsModel
+{
+    public int Id { get; set; }
+
+    public string Title { get; set; } = default!;
+
+    public int Price { get; set; }
+
+    public string Author { get; set; } = default!;
+
+    public int Year { get; set; } = default;
+
+    public int Pages { get; set; } = 1;
+
+    public string ImageLink { get; set; } = default!;
+
+    public string Link { get; set; } = default!;
 }
