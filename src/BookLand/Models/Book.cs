@@ -17,7 +17,7 @@ public class Book
     
     [Required(ErrorMessage = "Author can not be empty")]
     [MaxLength(100)]
-    public string Author { get; set; } = default!;
+    public required string Author { get; set; }
 
 
     [Required(ErrorMessage = "Year must be a number")]
