@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Application\Books\Notifications\" />
-    <Folder Include="Application\Books\Queries\" />
   </ItemGroup>
 
 </Project>
