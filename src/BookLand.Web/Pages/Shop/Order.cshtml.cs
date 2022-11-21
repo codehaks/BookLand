@@ -61,12 +61,6 @@ public class OrderModel : PageModel
 
         TempData["success"] = "Your order confirmed.";
 
-        await _mediator.Publish(new OrderCreatedNotification()
-        {
-            OrderId = order.Id,
-            UserName = userName
-        });
-
         // Send email
         // Notify Admin
         // Notify Accounting
