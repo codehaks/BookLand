@@ -36,7 +36,7 @@ public class OrderModel : PageModel
         Address = user.Address;
 
 
-        Book = _db.Books.Find(id);
+        Book = await _db.Books.FindAsync(id);
         BookId = id;
     }
 
