@@ -1,6 +1,5 @@
 using BookLand.Data;
 using BookLand.Models;
-using BookLand.Web.Events.OrderCreated;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
