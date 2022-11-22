@@ -1,3 +1,4 @@
+using BookLand.Application.Orders.Notifications;
 using BookLand.Data;
 using BookLand.Models;
 using MediatR;
@@ -57,6 +58,13 @@ public class OrderModel : PageModel
 
         _db.Orders.Add(order);
         await _db.SaveChangesAsync();
+
+        await _mediator.Publish(new OrderCreatedNotification
+        {
+            BookId = book.Id,
+            BookName = book.Title,
+            UserName = user.UserName
+        });
 
         TempData["success"] = "Your order confirmed.";
 

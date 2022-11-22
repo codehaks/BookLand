@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
 
-namespace BookLand.Web.Common;
+namespace BookLand.Application;
 
-public class EmailSender : IEmailSender
+public class EmailSender : IMyEmailSender
 {
     public Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
-        // Send Email
+        Console.WriteLine(email);
+        Console.WriteLine($"{subject} {htmlMessage}");
         return Task.CompletedTask;
     }
 }

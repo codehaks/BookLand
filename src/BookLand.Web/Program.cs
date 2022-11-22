@@ -1,6 +1,6 @@
+using BookLand.Application;
 using BookLand.Data;
 using BookLand.Models;
-using BookLand.Web.Common;
 using FluentAssertions.Common;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -46,7 +46,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>
     .AddEntityFrameworkStores<BookLandDbContext>().AddDefaultTokenProviders(); ;
 
 
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<IMyEmailSender, EmailSender>();
 builder.Services.AddMediatR(typeof(ApplicationUser));
 
 
