@@ -1,4 +1,5 @@
 using BookLand.Application;
+using BookLand.Application.Behaviors;
 using BookLand.Data;
 using BookLand.Models;
 using FluentAssertions.Common;
@@ -48,7 +49,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>
 
 builder.Services.AddTransient<IMyEmailSender, EmailSender>();
 builder.Services.AddMediatR(typeof(ApplicationUser));
-
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 var app = builder.Build();
 

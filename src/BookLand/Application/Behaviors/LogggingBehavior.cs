@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using BookLand.Application.Books.Queries;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace BookLand.Application.Behaviors;
@@ -15,10 +16,19 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        _logger.LogInformation($"Handling {typeof(TRequest).Name}");
+        _logger.LogInformation($"Handling {typeof(TRequest).FullName}");
+        _logger.LogInformation($"Object: {GetAllProperties(request)}");
+       
         var response = await next();
-        _logger.LogInformation($"Handled {typeof(TResponse).Name}");
+        _logger.LogInformation($"Handled {typeof(TResponse).FullName}");
 
         return response;
+    }
+
+    public static string GetAllProperties(object obj)
+    {
+        return string.Join(" ", obj.GetType()
+                                    .GetProperties()
+                                    .Select(prop => prop.GetValue(obj)));
     }
 }
