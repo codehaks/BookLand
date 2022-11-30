@@ -25,18 +25,11 @@ public class OrderModel : PageModel
     [BindProperty]
     public int BookId { get; set; }
 
-    public string Address { get; set; }
+    public string ShippingAddress { get; set; }
+    public int Quantity { get; set; }
 
     public async void OnGet(int id)
     {
-        var userName = User?.Identity?.Name;
-        // if user not found do ...
-
-
-        var user = await _userManager.FindByNameAsync(userName);
-        Address = user.Address;
-
-
         Book = await _db.Books.FindAsync(id);
         BookId = id;
     }
@@ -53,6 +46,8 @@ public class OrderModel : PageModel
             BookId = book.Id,
             UserId = user.Id,
             UserName = userName,
+            ShippingAddress=ShippingAddress,
+            Quantity=Quantity,
             TimeCreated = DateTime.Now
         };
 

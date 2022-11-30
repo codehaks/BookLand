@@ -11,13 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookLand.Migrations
 {
     [DbContext(typeof(BookLandDbContext))]
-    [Migration("20220815150754_Init")]
-    partial class Init
+    [Migration("20221130155116_OrderShipping")]
+    partial class OrderShipping
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
             modelBuilder.Entity("BookLand.Models.ApplicationUser", b =>
                 {
@@ -112,9 +113,6 @@ namespace BookLand.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Edition")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ImageLink")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -174,6 +172,14 @@ namespace BookLand.Migrations
 
                     b.Property<int>("BookId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Quantity")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ShippingAddress")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("TimeCreated")
                         .HasColumnType("TEXT");

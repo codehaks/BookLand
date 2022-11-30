@@ -11,13 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookLand.Migrations
 {
     [DbContext(typeof(BookLandDbContext))]
-    [Migration("20220815151018_BookEditionRemove")]
-    partial class BookEditionRemove
+    [Migration("20221130154927_Init")]
+    partial class Init
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
 
             modelBuilder.Entity("BookLand.Models.ApplicationUser", b =>
                 {
